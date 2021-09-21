@@ -1,7 +1,7 @@
 apiVersion: krew.googlecontainertools.github.com/v1alpha2
 kind: Plugin
 metadata:
-  name: advise-psp
+  name: advise-policy
 spec:
   version: {{ .TagName }}
   homepage: https://github.com/sysdiglabs/kube-policy-advisor
@@ -11,14 +11,14 @@ spec:
         os: darwin
         arch: amd64
     {{addURIAndSha "https://github.com/sysdiglabs/kube-policy-advisor/releases/download/{{ .TagName }}/kube-policy-advisor_{{ .TagName }}_darwin_amd64.tar.gz" .TagName }}
-    bin: kubectl-advise-psp
+    bin: kubectl-advise-policy
   - selector:
       matchLabels:
         os: linux
         arch: amd64
     {{addURIAndSha "https://github.com/sysdiglabs/kube-policy-advisor/releases/download/{{ .TagName }}/kube-policy-advisor_{{ .TagName }}_linux_amd64.tar.gz" .TagName }}
-    bin: kubectl-advise-psp
-  shortDescription: Suggests PodSecurityPolicies for cluster.
+    bin: kubectl-advise-policy
+  shortDescription: Suggests PodSecurityPolicies and OPA Policies for cluster.
   description: |
-    Suggests PSPs based on the required capabilities of the currently running
+    Suggests PSPs and OPA Policies based on the required capabilities of the currently running
     workloads or a given manifest.
