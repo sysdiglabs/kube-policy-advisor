@@ -1,0 +1,7 @@
+vendor*
+.idea*
+kube-policy-advisor
+advise-psp
+psp.yaml
+*.tar.gz
+.DS_Store
