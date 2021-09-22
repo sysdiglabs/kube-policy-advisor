@@ -2,9 +2,9 @@ before:
   hooks:
   - go mod download
 builds:
-- id: kubectl-advise-psp
+- id: kubectl-advise-policy
   main: ./
-  binary: kubectl-advise-psp
+  binary: kubectl-advise-policy
   env:
   - CGO_ENABLED=0
   goos:
@@ -15,7 +15,7 @@ builds:
 
 archives:
 - builds:
-  - kubectl-advise-psp
+  - kubectl-advise-policy
   name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
   wrap_in_directory: false
   format: tar.gz
