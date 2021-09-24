@@ -139,7 +139,7 @@ func main() {
 	var namespace string
 	var excludeNamespaces []string
 	var podObjFilename string
-	var pspFilename string
+	var policyFilename string
 	var OPAformat string
 	var OPAdefaultRule bool
 	var logLevel string
@@ -189,14 +189,14 @@ func main() {
 				log.Fatalf("--podFile must be provided")
 			}
 
-			if pspFilename == "" {
-				log.Fatalf("--pspFile must be provided")
+			if policyFilename == "" {
+				log.Fatalf("--policyFile must be provided")
 			}
 
 		},
 
 		Run: func(cmd *cobra.Command, args []string) {
-			err := convert(podObjFilename, pspFilename, OPAformat, OPAdefaultRule)
+			err := convert(podObjFilename, policyFilename, OPAformat, OPAdefaultRule)
 			if err != nil {
 				log.Fatalf("Could not run convert command: %v", err)
 			}
@@ -238,8 +238,8 @@ func main() {
 	inspectCmd.Flags().BoolVarP(&OPAdefaultRule, "OPADefaultRule", "", false, "(optional) OPA Default Rule: use this option iF OPA Default Rule is Deny ALL")
 
 	convertCmd.Flags().StringVar(&podObjFilename, "podFile", "", "Path to a yaml file containing an object with a pod Spec")
-	convertCmd.Flags().StringVar(&pspFilename, "pspFile", "", "Write the resulting output to this file")
-	convertCmd.Flags().StringVarP(&OPAformat, "policy", "p", "psp", "set policy type. Default psp")
+	convertCmd.Flags().StringVar(&policyFilename, "policyFile", "", "Write the resulting output to this file")
+	convertCmd.Flags().StringVarP(&OPAformat, "policy", "p", "opa", "set policy type. Default OPA")
 	convertCmd.Flags().BoolVarP(&OPAdefaultRule, "deny-by-default", "", false, "(optional) OPA Default Rule: use this option if OPA Default Rule is Deny ALL")
 
 	compareCmd.Flags().StringVar(&srcYamlDir, "sourceDir", "", "Source YAML directory to load YAMLs")

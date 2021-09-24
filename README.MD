@@ -16,15 +16,15 @@ The plugin will be available as `kubectl advise-policy`.
 
 ## Build and Run locally
 1. ```make build```
-2. ```./kube-policy-advisor inspect``` to generate Pod Security Policy based on running cluster configuration
-   - 2.1 ```./kube-policy-advisor inspect --report``` to print the details reports (why this PSP is recommended for the cluster)
-   - 2.2 ```./kube-policy-advisor inspect --grant``` to print PSPs, roles and rolebindings for service accounts (refer to [psp-grant.yaml](./test-yaml/psp-grant.yaml))
-   - 2.3 ```./kube-policy-advisor inspect --namespace=<ns>``` to print report or PSP(s) within a given namespace (default to all) 
-   - 2.4 ```./kube-policy-advisor inspect --policy opa``` to generate OPA Policy based on running cluster configuration
-   - 2.5 ```./kube-policy-advisor inspect --policy opa --deny-by-default``` to generate an OPA Policy, where OPA Default Rule is Deny ALL
-4. ```./kube-policy-advisor convert --podFile <path> --pspFile <path>``` to generate a PSP from a single .yaml file.
-   - 4.1 ```./kube-policy-advisor convert --policy opa --podFile <path> --pspFile <path> ``` to generate an OPA Policy from a single .yaml file.
-   - 4.2 ```./kube-policy-advisor convert --policy opa --podFile <path> --pspFile <path> --deny-by-default``` to generate an OPA Policy from a single .yaml file, where OPA Default Rule is Deny ALL.
+2. ```./kube-policy-advisor inspect``` to generate OPA Policy based on running cluster configuration. OPA is the default output.
+   - 2.1 ```./kube-policy-advisor inspect --namespace=<ns>``` to print report or OPA Policy within a given namespace (default to all)
+   - 2.2 ```./kube-policy-advisor inspect --deny-by-default``` to generate an OPA Policy, where OPA Default Rule is Deny ALL
+   - 2.3 ```./kube-policy-advisor inspect --policy psp``` to generate PSP based on running cluster configuration
+   - 2.4 ```./kube-policy-advisor inspect --policy psp --report``` to print the details reports (why this PSP is recommended for the cluster)
+   - 2.5 ```./kube-policy-advisor inspect --policy psp --grant``` to print PSPs, roles and rolebindings for service accounts (refer to [psp-grant.yaml](./test-yaml/psp-grant.yaml))
+4. ```./kube-policy-advisor convert --podFile <path> --pspFile <path>``` to generate a OPA Policy from a single .yaml file.
+   - 4.1 ```./kube-policy-advisor convert --podFile <path> --policy <path> --deny-by-default``` to generate an OPA Policy from a single .yaml file, where OPA Default Rule is Deny ALL.
+   - 4.2 ```./kube-policy-advisor convert --policy psp --podFile <path> --policyFile <path> ``` to generate PSP from a single .yaml file.
     
 ## Build and Run as Container
 1. ```docker build -t <Image Name> -f container/Dockerfile .```
@@ -61,6 +61,7 @@ Some attributes(e.g. capabilities) required gathering runtime information in ord
 - [x] Basic functionalities;
 - [ ] Create PSP's for common charts
 - [x] Kubectl plugin
+- [x] Generate OPA policies
 
 ## Sample Pod Security Policy
 Command: `./kube-policy-advisor inspect --namespace=psp-test`
