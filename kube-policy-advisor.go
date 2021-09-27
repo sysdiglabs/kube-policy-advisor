@@ -88,7 +88,7 @@ func convert(podObjFilename string, pspFilename string, OPAformat string, OPAdef
 
 	err = ioutil.WriteFile(pspFilename, []byte(pspString), 0644)
 
-	log.Infof("Wrote generated psp to %s", pspFilename)
+	log.Infof("Wrote generated policy to %s", pspFilename)
 
 	return nil
 }
@@ -168,8 +168,8 @@ func main() {
 
 	var inspectCmd = &cobra.Command{
 		Use:   "inspect",
-		Short: "Inspect a live K8s Environment to generate a PodSecurityPolicy",
-		Long:  "Fetch all objects in the provided namespace to generate a Pod Security Policy",
+		Short: "Inspect a live K8s Environment to generate an OPA Policy (default) or a Pod Security Policy",
+		Long:  "Fetch all objects in the provided namespace to generate an OPA Policy (default) or a Pod Security Policy",
 		Run: func(cmd *cobra.Command, args []string) {
 
 			err := inspect(kubeconfig, namespace, excludeNamespaces, withReport, withGrant, OPAformat, OPAdefaultRule)
@@ -182,8 +182,8 @@ func main() {
 
 	var convertCmd = &cobra.Command{
 		Use:   "convert",
-		Short: "Generate a PodSecurityPolicy from a single K8s Yaml file",
-		Long:  "Generate a PodSecurityPolicy from a single K8s Yaml file containing a pod Spec e.g. DaemonSet, Deployment, ReplicaSet, StatefulSet, ReplicationController, CronJob, Job, or Pod",
+		Short: "Generate an OPA Policy (default) or a Pod Security Policy from a single K8s Yaml file",
+		Long:  "Generate an OPA Policy (default) or a Pod Security Policy from a single K8s Yaml file containing a pod Spec e.g. DaemonSet, Deployment, ReplicaSet, StatefulSet, ReplicationController, CronJob, Job, or Pod",
 		PreRun: func(cmd *cobra.Command, args []string) {
 			if podObjFilename == "" {
 				log.Fatalf("--podFile must be provided")

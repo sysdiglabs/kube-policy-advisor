@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/open-policy-agent/opa/ast"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 	"strconv"
+
+	"github.com/open-policy-agent/opa/ast"
 
 	"k8s.io/client-go/kubernetes/scheme"
 
@@ -902,7 +903,7 @@ func (pg *Generator) GenerateOPAWithName(
 
 	mod.Rules = append(mod.Rules, valueSecContextRule)
 
-	rule.Body.Append(ast.MustParseExpr("message := sprintf(\"Workflow or pod compliant with the policy.\", [workload.metadata.name])"))
+	rule.Body.Append(ast.MustParseExpr("message := sprintf(\"Workflow or pod not compliant with the security policy.\", [workload.metadata.name])"))
 	mod.Package = pack
 	mod.Rules = append(mod.Rules, &rule)
 
