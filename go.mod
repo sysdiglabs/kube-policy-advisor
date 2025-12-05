@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/go-version v1.2.0
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/open-policy-agent/opa v0.32.1
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.8.3
 	github.com/spf13/cobra v1.2.1
 	golang.org/x/net v0.23.0 // indirect
 	gopkg.in/inf.v0 v0.9.0 // indirect
